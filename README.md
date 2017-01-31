@@ -10,10 +10,10 @@ In folder `uaa`, `foo` and `gateway` perform
 $ ./gradlew build -Pprod buildDocker
 ```
 
-and in folgder `docker` run
+and in folder `docker` run
 
 ```
-$ docker-compuse up -d
+$ docker-compose up -d
 ```
 
 *note*: Depending on the performance of the machine, the services `foo` and `gateway` might fail, if they try to fetch the UAAs public key earlier, then it registers itself to the registry. Use `docker logs` and `docker-compose ps` to watch the status of the bootup, and repeat `docker-compose up -d`.
