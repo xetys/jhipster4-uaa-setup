@@ -1,0 +1,14 @@
+{
+  "generator-jhipster": {
+    "appsFolders": [
+      "foo",
+      "gateway",
+      "uaa"
+    ],
+    "directoryPath": "../",
+    "monitoring": "no",
+    "serviceDiscoveryType": "eureka",
+    "adminPassword": "admin",
+    "jwtSecretKey": "150d385d0f11dfa485ca22f84f55324805f19ea6"
+  }
+}

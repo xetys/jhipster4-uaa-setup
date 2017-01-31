@@ -1,0 +1,57 @@
+<div>
+    <h2><span jhiTranslate="jh4UaaApp.foo.home.title">Foos</span>
+        <button class="btn btn-primary float-xs-right create-foo" [routerLink]="['/', { outlets: { popup: ['foo-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="jh4UaaApp.foo.home.createLabel">
+            Create new Foo
+            </span>
+        </button></h2>
+    <jhi-alert></jhi-alert>
+
+    <div class="container-fluid">
+        <div class="row">
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="foos">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="jh4UaaApp.foo.value">Value</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let foo of foos ;trackBy: trackId">
+                <td><a [routerLink]="['../foo', foo.id ]">{{foo.id}}</a></td>
+                <td>{{foo.value}}</td>
+                <td class="text-xs-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../foo', foo.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-xs hidden-sm" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'foo/'+ foo.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-xs hidden-sm" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'foo/'+ foo.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-xs hidden-sm" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

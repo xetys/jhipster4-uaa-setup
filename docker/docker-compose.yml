@@ -1,0 +1,71 @@
+version: '2'
+services:
+    foo-app:
+        image: foo
+        external_links:
+            - foo-mysql:mysql
+            - jhipster-registry:registry
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@registry:8761/config
+            - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/foo?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - JHIPSTER_SLEEP=10
+            - JHIPSTER_REGISTRY_PASSWORD=admin
+    foo-mysql:
+        container_name: foo-mysql
+        image: mysql:5.7.13
+        environment:
+            - MYSQL_USER=root
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_DATABASE=foo
+        command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8
+    
+    jh4uaa-app:
+        image: jh4uaa
+        external_links:
+            - jh4uaa-mysql:mysql
+            - jhipster-registry:registry
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@registry:8761/config
+            - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/jh4uaa?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - SPRING_DATA_CASSANDRA_CONTACTPOINTS=cassandra
+            - JHIPSTER_SLEEP=80
+            - JHIPSTER_REGISTRY_PASSWORD=admin
+        ports:
+            - 8080:8080
+    jh4uaa-mysql:
+        container_name: jh4uaa-mysql
+        image: mysql:5.7.13
+        environment:
+            - MYSQL_USER=root
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_DATABASE=jh4uaa
+        command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8
+    
+    uaa-app:
+        image: uaa
+        external_links:
+            - uaa-mysql:mysql
+            - jhipster-registry:registry
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@registry:8761/config
+            - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/uaa?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - JHIPSTER_SLEEP=10
+            - JHIPSTER_REGISTRY_PASSWORD=admin
+    uaa-mysql:
+        container_name: uaa-mysql
+        image: mysql:5.7.13
+        environment:
+            - MYSQL_USER=root
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_DATABASE=uaa
+        command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8
+    
+    jhipster-registry:
+        extends:
+            file: jhipster-registry.yml
+            service: jhipster-registry
+
+
